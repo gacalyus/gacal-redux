@@ -1,3 +1,4 @@
 export default {
-  currentCategory: { categoryName: "Belirli yerler" },
+  currentCategory: { categoryName: "Belirli Kategori" },
+  categories: [],
 };
