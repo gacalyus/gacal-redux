@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as categoryActions from "../../reduxx/actions/categoryActions";
+import * as productActions from "../../reduxx/actions/productActions";
 
 class CategoryList extends Component {
   componentDidMount() {
@@ -12,6 +13,7 @@ class CategoryList extends Component {
 
   selectCategory = (category) => {
     this.props.actions.changeCategory(category);
+    this.props.actions.getProducts(category.id);
   };
 
   render() {
@@ -32,10 +34,6 @@ class CategoryList extends Component {
             </ListItem>
           ))}
         </List>
-        Seçili Kategori 
-        <Button style={{marginLeft:10}} variant="outlined" color="primary">
-          {this.props.currentCategory.categoryName}
-        </Button>
       </div>
     );
   }
@@ -59,6 +57,7 @@ function mapDispatchToProps(dispatch) {
         categoryActions.changeCategory,
         dispatch
       ),
+      getProducts: bindActionCreators(productActions.getProducts, dispatch),
     },
   };
 }

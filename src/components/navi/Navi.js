@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Box, Button, MenuItem } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
+import CartSummary from "../cart/CartSummary";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,16 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Navi() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -46,33 +38,7 @@ function Navi() {
             Material UI
           </Typography>
 
-          <Button
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit"
-          >
-            Card
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-            </Menu>
-          </Button>
+          <CartSummary></CartSummary>
         </Toolbar>
       </AppBar>
     </div>
