@@ -5,5 +5,5 @@ export function addToCart(cartItem) {
 }
 
 export function removeFromCart(product) {
-    return { type: actionsTypes.ADD_TO_CART, payload: product };
+    return { type: actionsTypes.REMOVE_TO_CART, payload: product };
   }
