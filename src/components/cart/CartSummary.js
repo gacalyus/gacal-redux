@@ -11,13 +11,24 @@ import {
   Badge,
 } from "reactstrap";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import {Link }from "react-router-dom";
-import alertify from "alertifyjs";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 class CartSummary extends Component {
   removeFromCart(product) {
-    this.props.actions.removeFromCart(product);
-    alertify.error(product.productName + "  Sepet'en başarıyla silindi...")
+    Swal.fire({
+      title: "Emin misiniz?",
+      text: "Sepetten silinecektir!",
+      icon: "uyarı",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.value) {
+        this.props.actions.removeFromCart(product)
+      }
+    });
   }
   renderEmpty() {
     return (
@@ -39,22 +50,23 @@ class CartSummary extends Component {
             {this.props.cart.map((cartItem) => (
               <DropdownItem key={cartItem.product.id}>
                 <Badge
-                  style={{ marginRight: "5px" , backgroundColor: "green" }}
-                  onClick={() =>
-                    this.removeFromCart(cartItem.product)
-                  }
+                  style={{ marginRight: "5px", backgroundColor: "green" }}
+                  onClick={() => this.removeFromCart(cartItem.product)}
                 >
                   -
                 </Badge>
                 {cartItem.product.productName}
-                <Badge style={{ marginLeft: "5px" , backgroundColor: "red" }}>
+                <Badge style={{ marginLeft: "5px", backgroundColor: "red" }}>
                   {cartItem.quantity}
                 </Badge>
               </DropdownItem>
             ))}
 
             <DropdownItem divider />
-            <DropdownItem> <Link to={"/cart"} > Sepete git </Link></DropdownItem>
+            <DropdownItem>
+              {" "}
+              <Link to={"/cart"}> Sepete git </Link>
+            </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Box>
