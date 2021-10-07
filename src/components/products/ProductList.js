@@ -11,7 +11,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import alertify from "alertifyjs";
+import Swal from "sweetalert2";
 
 class ProductList extends Component {
   componentDidMount() {
@@ -20,7 +20,13 @@ class ProductList extends Component {
 
   addToCart = (product) => {
     this.props.actions.addToCart({ quantity: 1, product });
-    alertify.success(product.productName + "Sepet'e başarıyla eklendi...")
+    Swal.fire({
+      icon: 'success',
+      title: 'Good Job...',
+      text: 'Sepete Başarıyla Eklendi!',
+      footer: 'Seçime devam ediniz',
+      timer: 1500
+    })
   };
   render() {
     return (
@@ -44,10 +50,10 @@ class ProductList extends Component {
                 <TableCell style={{ fontWeight: "bolder" }}>
                   Birim Fiyat
                 </TableCell>
-                <TableCell  align="center" style={{ fontWeight: "bolder" }}>
+                <TableCell align="center" style={{ fontWeight: "bolder" }}>
                   Birim Başına Fiyat
                 </TableCell>
-                <TableCell  align="center" style={{ fontWeight: "bolder" }}>
+                <TableCell align="center" style={{ fontWeight: "bolder" }}>
                   Stoktaki Ürün
                 </TableCell>
                 <TableCell></TableCell>
@@ -62,7 +68,7 @@ class ProductList extends Component {
                   </TableCell>
                   <TableCell>{product.quantityPerUnit}</TableCell>
                   <TableCell align="center">{product.unitPrice}</TableCell>
-                  <TableCell  align="center">{product.unitsInStock}</TableCell>
+                  <TableCell align="center">{product.unitsInStock}</TableCell>
                   <TableCell>
                     <Button
                       color="primary"
